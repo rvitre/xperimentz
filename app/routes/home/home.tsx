@@ -1,5 +1,13 @@
-import type { Route } from "./+types/home";
+﻿import type { Route } from "./+types/home";
 import { Link } from "react-router";
+import {
+  bodyText,
+  listGrid,
+  pageHeading,
+  pageShell,
+  sectionWrapper,
+  surface,
+} from "../../styles/primitives";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -13,22 +21,22 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Home() {
   return (
-    <main className="container mx-auto pt-16 p-4">
-      <h1 className="text-4xl font-semibold tracking-tight">Xperimentz</h1>
-      <p className="mt-3 text-gray-600 dark:text-gray-300">
+    <main className={pageShell()}>
+      <h1 className={pageHeading({ level: "hero" })}>Xperimentz</h1>
+      <p className={bodyText({ margin: "md" })}>
         A growing collection of visual and interactive experiments.
       </p>
 
-      <section className="mt-10">
-        <h2 className="text-xl font-medium">Experiments</h2>
-        <ul className="mt-4 grid gap-4 sm:grid-cols-2">
+      <section className={sectionWrapper({ spacing: "lg" })}>
+        <h2 className={pageHeading({ level: "section" })}>Experiments</h2>
+        <ul className={listGrid()}>
           <li>
             <Link
               to="/optical-illusion"
-              className="block rounded-xl border border-gray-200 dark:border-gray-800 p-5 hover:shadow-sm transition-shadow"
+              className={surface({ padding: "md", interactive: true, class: "block" })}
             >
-              <div className="font-medium">Optical Illusion</div>
-              <div className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+              <div className={pageHeading({ level: "item" })}>Optical Illusion</div>
+              <div className={bodyText({ size: "sm", tone: "subtle", margin: "sm" })}>
                 First experiment sandbox.
               </div>
             </Link>
@@ -36,10 +44,10 @@ export default function Home() {
           <li>
             <Link
               to="/motion-induced-blindness"
-              className="block rounded-xl border border-gray-200 dark:border-gray-800 p-5 hover:shadow-sm transition-shadow"
+              className={surface({ padding: "md", interactive: true, class: "block" })}
             >
-              <div className="font-medium">Motion-Induced Blindness</div>
-              <div className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+              <div className={pageHeading({ level: "item" })}>Motion-Induced Blindness</div>
+              <div className={bodyText({ size: "sm", tone: "subtle", margin: "sm" })}>
                 Rotating mask causing target disappearance.
               </div>
             </Link>
@@ -47,10 +55,10 @@ export default function Home() {
           <li>
             <Link
               to="/hermann-grid"
-              className="block rounded-xl border border-gray-200 dark:border-gray-800 p-5 hover:shadow-sm transition-shadow"
+              className={surface({ padding: "md", interactive: true, class: "block" })}
             >
-              <div className="font-medium">Hermann Grid</div>
-              <div className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+              <div className={pageHeading({ level: "item" })}>Hermann Grid</div>
+              <div className={bodyText({ size: "sm", tone: "subtle", margin: "sm" })}>
                 Classic grid illusion with phantom spots.
               </div>
             </Link>
