@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MotionInducedBlindness } from './mib';
+import { MotionInducedBlindness } from './MotionInducedBlindness';
 
 describe('MotionInducedBlindness component', () => {
   it('renders and allows toggling play/pause', async () => {
@@ -25,4 +25,3 @@ describe('MotionInducedBlindness component', () => {
     expect(dotsSlider).toBeInTheDocument();
   });
 });
-

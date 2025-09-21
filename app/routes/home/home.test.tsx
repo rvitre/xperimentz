@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import Home from './home';
-import OpticalIllusion from './optical-illusion';
+import OpticalIllusion from '../optical-illusion/optical-illusion';
 
 function renderWithRouter(initialEntries: string[] = ['/']) {
   const router = createMemoryRouter(
@@ -23,4 +23,3 @@ describe('Home route', () => {
     expect(link).toHaveAttribute('href', '/optical-illusion');
   });
 });
-

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { HermannGrid } from './hermann-grid';
+import { HermannGrid } from './HermannGrid';
 
 describe('HermannGrid component', () => {
   it('renders canvas and sliders', async () => {
