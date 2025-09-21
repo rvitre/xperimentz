@@ -14,4 +14,3 @@ describe('Motion-Induced Blindness route', () => {
     ).toBeInTheDocument();
   });
 });
-

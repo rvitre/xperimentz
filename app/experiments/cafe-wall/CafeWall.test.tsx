@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { CafeWallDemo } from './cafe-wall';
+import { CafeWallDemo } from './CafeWall';
 
 describe('CafeWallDemo', () => {
   it('renders canvas and sliders', async () => {
@@ -16,4 +16,3 @@ describe('CafeWallDemo', () => {
     expect(rows).toBeInTheDocument();
   });
 });
-

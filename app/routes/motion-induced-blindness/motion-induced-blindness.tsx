@@ -1,5 +1,5 @@
 import type { Route } from "./+types/motion-induced-blindness";
-import { MotionInducedBlindness } from "../experiments/mib";
+import { MotionInducedBlindness } from "../../experiments/motion-induced-blindness/MotionInducedBlindness";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -26,4 +26,3 @@ export default function MIBRoute() {
     </main>
   );
 }
-

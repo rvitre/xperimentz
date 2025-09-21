@@ -1,5 +1,5 @@
 import type { Route } from "./+types/hermann-grid";
-import { HermannGrid } from "../experiments/hermann-grid";
+import { HermannGrid } from "../../experiments/hermann-grid/HermannGrid";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -25,4 +25,3 @@ export default function HermannGridRoute() {
     </main>
   );
 }
-

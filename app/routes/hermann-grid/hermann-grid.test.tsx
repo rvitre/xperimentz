@@ -9,4 +9,3 @@ describe('Hermann Grid route', () => {
     expect(screen.getByLabelText(/hermann grid canvas/i)).toBeInTheDocument();
   });
 });
-
