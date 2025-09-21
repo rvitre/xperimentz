@@ -1,4 +1,14 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+﻿import { useEffect, useMemo, useRef, useState } from 'react';
+import {
+  canvasSurface,
+  formPanel,
+  labelRow,
+  labelText,
+  rangeInput,
+  splitLayout,
+  surface,
+  valueText,
+} from "../../styles/primitives";
 
 type CafeWallParams = {
   cols: number;
@@ -54,18 +64,18 @@ export function CafeWallDemo() {
   }, [params, size]);
 
   return (
-    <div className="grid gap-6 md:grid-cols-[1fr_auto] items-start">
-      <div className="rounded-xl border border-gray-200 dark:border-gray-800 p-4 bg-white dark:bg-gray-900 max-w-full overflow-auto">
+    <div className={splitLayout()}>
+      <div className={surface({ tone: "subtle", overflow: "auto", width: "full" })}>
         <canvas
           ref={canvasRef}
           width={size.width}
           height={size.height}
-          className="block max-w-full h-auto"
+          className={canvasSurface()}
           aria-label="Café Wall illusion canvas"
         />
       </div>
       <form
-        className="space-y-4 rounded-xl border border-gray-200 dark:border-gray-800 p-4"
+        className={formPanel()}
         onSubmit={(e) => e.preventDefault()}
       >
         <Field label="Columns" value={params.cols} min={4} max={40} step={1}
@@ -106,9 +116,9 @@ function Field({
   const id = label.toLowerCase().replace(/\s+/g, '-') + '-input';
   return (
     <div>
-      <div className="flex items-center justify-between">
-        <label htmlFor={id} className="text-sm font-medium">{label}</label>
-        <span className="text-xs text-gray-500 dark:text-gray-400 tabular-nums">{value}</span>
+      <div className={labelRow()}>
+        <label htmlFor={id} className={labelText()}>{label}</label>
+        <span className={valueText()}>{value}</span>
       </div>
       <input
         id={id}
@@ -118,7 +128,7 @@ function Field({
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full"
+        className={rangeInput()}
         aria-label={label}
       />
     </div>

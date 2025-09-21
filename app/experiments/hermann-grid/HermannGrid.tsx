@@ -1,4 +1,16 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+﻿import { useEffect, useMemo, useRef, useState } from 'react';
+import {
+  button,
+  canvasSurface,
+  checkboxLabel,
+  formPanel,
+  labelRow,
+  labelText,
+  rangeInput,
+  splitLayout,
+  surface,
+  valueText,
+} from "../../styles/primitives";
 
 type GridParams = {
   rows: number;
@@ -81,22 +93,22 @@ export function HermannGrid() {
   }, [dims.height, dims.width, p.bar, p.cols, p.inverted, p.rows, p.size, showMarkers]);
 
   return (
-    <div className="grid gap-6 md:grid-cols-[1fr_auto] items-start">
-      <div className="rounded-xl border border-gray-200 dark:border-gray-800 p-4 bg-black max-w-full overflow-auto">
+    <div className={splitLayout()}>
+      <div className={surface({ tone: "contrast", overflow: "auto", width: "full" })}>
         <canvas
           ref={canvasRef}
           width={dims.width}
           height={dims.height}
-          className="block max-w-full h-auto"
+          className={canvasSurface()}
           aria-label="Hermann Grid canvas"
         />
       </div>
-      <form className="space-y-4 rounded-xl border border-gray-200 dark:border-gray-800 p-4" onSubmit={(e) => e.preventDefault()}>
+      <form className={formPanel()} onSubmit={(e) => e.preventDefault()}>
         <button
           type="button"
           aria-pressed={showMarkers}
           onClick={() => setShowMarkers((v) => !v)}
-          className="rounded-md border border-gray-300 dark:border-gray-700 px-3 py-1 text-sm"
+          className={button({ active: showMarkers })}
         >
           {showMarkers ? 'Hide Intersection Markers' : 'Show Intersection Markers'}
         </button>
@@ -104,7 +116,7 @@ export function HermannGrid() {
         <Slider label="Columns" value={p.cols} min={4} max={20} step={1} onChange={(v) => setP((s) => ({ ...s, cols: v }))} />
         <Slider label="Bar" value={p.bar} min={6} max={48} step={1} onChange={(v) => setP((s) => ({ ...s, bar: v }))} />
         <Slider label="Cell Size" value={p.size} min={24} max={96} step={2} onChange={(v) => setP((s) => ({ ...s, size: v }))} />
-        <label className="flex items-center gap-2 text-sm">
+        <label className={checkboxLabel()}>
           <input type="checkbox" checked={p.inverted} onChange={(e) => setP((s) => ({ ...s, inverted: e.target.checked }))} />
           Invert Colors
         </label>
@@ -124,9 +136,9 @@ function Slider({ label, value, min, max, step, onChange }: {
   const id = label.toLowerCase().replace(/\s+/g, '-') + '-input';
   return (
     <div>
-      <div className="flex items-center justify-between">
-        <label htmlFor={id} className="text-sm font-medium">{label}</label>
-        <span className="text-xs text-gray-500 dark:text-gray-400 tabular-nums">{value}</span>
+      <div className={labelRow()}>
+        <label htmlFor={id} className={labelText()}>{label}</label>
+        <span className={valueText()}>{value}</span>
       </div>
       <input
         id={id}
@@ -136,7 +148,7 @@ function Slider({ label, value, min, max, step, onChange }: {
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full"
+        className={rangeInput()}
         aria-label={label}
       />
     </div>

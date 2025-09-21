@@ -1,4 +1,15 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+﻿import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  button,
+  canvasSurface,
+  formPanel,
+  labelRow,
+  labelText,
+  rangeInput,
+  splitLayout,
+  surface,
+  valueText,
+} from "../../styles/primitives";
 
 type MibParams = {
   dots: number;
@@ -136,18 +147,18 @@ export function MotionInducedBlindness() {
   }, [params.maskRadius, size.height, size.width]);
 
   return (
-    <div className="grid gap-6 md:grid-cols-[1fr_auto] items-start">
-      <div className="rounded-xl border border-gray-200 dark:border-gray-800 p-4 bg-black max-w-full overflow-auto">
+    <div className={splitLayout()}>
+      <div className={surface({ tone: "contrast", overflow: "auto", width: "full" })}>
         <canvas
           ref={canvasRef}
           width={canvasSize.width}
           height={canvasSize.height}
-          className="block max-w-full h-auto"
+          className={canvasSurface()}
           aria-label="Motion-Induced Blindness canvas"
         />
       </div>
-      <form className="space-y-4 rounded-xl border border-gray-200 dark:border-gray-800 p-4" onSubmit={(e) => e.preventDefault()}>
-        <Toggle label={running ? 'Pause' : 'Play'} onClick={() => setRunning((v) => !v)} />
+      <form className={formPanel()} onSubmit={(e) => e.preventDefault()}>
+        <Toggle label={running ? 'Pause' : 'Play'} onClick={() => setRunning((v) => !v)} active={!running} />
         <Slider label="Dots" value={params.dots} min={50} max={1000} step={10} onChange={(v) => setParams((p) => ({ ...p, dots: v }))} />
         <Slider label="Dot Radius" value={params.dotRadius} min={1} max={5} step={1} onChange={(v) => setParams((p) => ({ ...p, dotRadius: v }))} />
         <Slider label="Rotation Speed" value={params.rotationSpeed} min={0} max={2} step={0.05} onChange={(v) => setParams((p) => ({ ...p, rotationSpeed: v }))} />
@@ -170,9 +181,9 @@ function Slider({ label, value, min, max, step, onChange }: {
   const id = label.toLowerCase().replace(/\s+/g, '-') + '-input';
   return (
     <div>
-      <div className="flex items-center justify-between">
-        <label htmlFor={id} className="text-sm font-medium">{label}</label>
-        <span className="text-xs text-gray-500 dark:text-gray-400 tabular-nums">{value}</span>
+      <div className={labelRow()}>
+        <label htmlFor={id} className={labelText()}>{label}</label>
+        <span className={valueText()}>{value}</span>
       </div>
       <input
         id={id}
@@ -182,16 +193,16 @@ function Slider({ label, value, min, max, step, onChange }: {
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full"
+        className={rangeInput()}
         aria-label={label}
       />
     </div>
   );
 }
 
-function Toggle({ label, onClick }: { label: string; onClick: () => void }) {
+function Toggle({ label, onClick, active }: { label: string; onClick: () => void; active: boolean }) {
   return (
-    <button type="button" className="rounded-md border border-gray-300 dark:border-gray-700 px-3 py-1 text-sm" onClick={onClick}>
+    <button type="button" className={button({ active })} onClick={onClick}>
       {label}
     </button>
   );

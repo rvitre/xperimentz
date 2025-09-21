@@ -1,5 +1,6 @@
-import type { Route } from "./+types/hermann-grid";
+﻿import type { Route } from "./+types/hermann-grid";
 import { HermannGrid } from "../../experiments/hermann-grid/HermannGrid";
+import { bodyText, pageHeading, pageShell, sectionWrapper } from "../../styles/primitives";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -13,13 +14,13 @@ export function meta({}: Route.MetaArgs) {
 
 export default function HermannGridRoute() {
   return (
-    <main className="container mx-auto pt-16 p-4">
-      <h1 className="text-3xl font-semibold">Hermann Grid</h1>
-      <p className="mt-4 text-gray-600 dark:text-gray-300">
+    <main className={pageShell()}>
+      <h1 className={pageHeading({ level: "page" })}>Hermann Grid</h1>
+      <p className={bodyText({ margin: "lg" })}>
         Observe phantom gray spots at the intersections. Adjust the sliders to vary the effect.
       </p>
 
-      <div className="mt-8">
+      <div className={sectionWrapper()}>
         <HermannGrid />
       </div>
     </main>

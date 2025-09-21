@@ -1,5 +1,6 @@
-import type { Route } from "./+types/optical-illusion";
+﻿import type { Route } from "./+types/optical-illusion";
 import { CafeWallDemo } from "../../experiments/cafe-wall/CafeWall";
+import { bodyText, pageHeading, pageShell, sectionWrapper } from "../../styles/primitives";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -10,13 +11,13 @@ export function meta({}: Route.MetaArgs) {
 
 export default function OpticalIllusion() {
   return (
-    <main className="container mx-auto pt-16 p-4">
-      <h1 className="text-3xl font-semibold">Optical Illusion</h1>
-      <p className="mt-4 text-gray-600 dark:text-gray-300">
+    <main className={pageShell()}>
+      <h1 className={pageHeading({ level: "page" })}>Optical Illusion</h1>
+      <p className={bodyText({ margin: "lg" })}>
         Café Wall illusion — adjust sliders to amplify the effect.
       </p>
 
-      <div className="mt-8">
+      <div className={sectionWrapper()}>
         <CafeWallDemo />
       </div>
     </main>
