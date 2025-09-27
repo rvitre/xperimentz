@@ -1,5 +1,5 @@
 ﻿import type { Route } from "./+types/motion-induced-blindness";
-import { MotionInducedBlindness } from "../../experiments/motion-induced-blindness/MotionInducedBlindness";
+import { MotionInducedBlindness } from "../../experiments/MotionInducedBlindness/MotionInducedBlindness";
 import { bodyText, pageHeading, pageShell, sectionWrapper } from "../../styles/primitives";
 
 export function meta({}: Route.MetaArgs) {

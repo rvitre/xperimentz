@@ -1,5 +1,5 @@
 ﻿import type { Route } from "./+types/hermann-grid";
-import { HermannGrid } from "../../experiments/hermann-grid/HermannGrid";
+import { HermannGrid } from "../../experiments/HermallGrid/HermannGrid";
 import { bodyText, pageHeading, pageShell, sectionWrapper } from "../../styles/primitives";
 
 export function meta({}: Route.MetaArgs) {

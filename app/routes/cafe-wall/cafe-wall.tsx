@@ -1,5 +1,5 @@
-﻿import type { Route } from "./+types/optical-illusion";
-import { CafeWallDemo } from "../../experiments/cafe-wall/CafeWall";
+﻿import type { Route } from "./+types/cafe-wall";
+import { CafeWallDemo } from "../../experiments/CafeWall/CafeWall";
 import { bodyText, pageHeading, pageShell, sectionWrapper } from "../../styles/primitives";
 
 export function meta({}: Route.MetaArgs) {

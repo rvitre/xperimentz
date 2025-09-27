@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import OpticalIllusion from './optical-illusion';
+import OpticalIllusion from './cafe-wall';
 
 describe('Optical Illusion route', () => {
   it('shows heading and cafe wall description', () => {
