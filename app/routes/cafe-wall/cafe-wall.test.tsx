@@ -6,6 +6,6 @@ describe('Optical Illusion route', () => {
   it('shows heading and cafe wall description', () => {
     render(<OpticalIllusion />);
     expect(screen.getByRole('heading', { name: /optical illusion/i })).toBeInTheDocument();
-    expect(screen.getByText(/café wall illusion/i)).toBeInTheDocument();
+    expect(screen.getByText(/cafe wall illusion/i)).toBeInTheDocument();
   });
 });

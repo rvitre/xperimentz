@@ -1,10 +1,10 @@
-﻿import type { Route } from "./+types/motion-induced-blindness";
-import { MotionInducedBlindness } from "../../experiments/MotionInducedBlindness/MotionInducedBlindness";
+import type { Route } from "./+types/motion-induced-blindness";
+import { MotionInducedBlindness } from "../../building-blocks/experimentz/MotionInducedBlindness/MotionInducedBlindness";
 import { bodyText, pageHeading, pageShell, sectionWrapper } from "../../styles/primitives";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Motion-Induced Blindness • Xperimentz" },
+    { title: "Motion-Induced Blindness - Xperimentz" },
     {
       name: "description",
       content: "Targets disappear intermittently when masked by rotating motion.",
