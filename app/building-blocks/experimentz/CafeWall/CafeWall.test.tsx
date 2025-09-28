@@ -9,7 +9,7 @@ describe("CafeWallDemo", () => {
     const canvas = screen.getByLabelText(/cafe wall illusion canvas/i);
     expect(canvas).toBeInTheDocument();
     const user = userEvent.setup();
-    const rows = screen.getByLabelText(/rows/i);
+    const [rows] = screen.getAllByRole('slider', { name: /rows/i });
     await user.click(rows);
     // Change value to verify control is interactive
     await user.type(rows, "{arrowright}{arrowright}");

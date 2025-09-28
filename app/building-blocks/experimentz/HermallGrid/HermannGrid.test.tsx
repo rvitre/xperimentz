@@ -8,7 +8,7 @@ describe('HermannGrid component', () => {
     render(<HermannGrid />);
     expect(screen.getByLabelText(/hermann grid canvas/i)).toBeInTheDocument();
     const user = userEvent.setup();
-    const rows = screen.getByLabelText(/rows/i);
+    const [rows] = screen.getAllByRole('slider', { name: /rows/i });
     await user.click(rows);
     expect(rows).toBeInTheDocument();
   });
