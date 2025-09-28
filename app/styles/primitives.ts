@@ -144,6 +144,22 @@ export const rangeInput = tv({
   base: "w-full",
 });
 
+export const sliderRoot = tv({
+  base: "flex flex-col gap-2",
+});
+
+export const sliderTrack = tv({
+  base: "relative h-2 w-full rounded-full bg-gray-200 dark:bg-gray-800 overflow-hidden",
+});
+
+export const sliderTrackHighlight = tv({
+  base: "absolute left-0 top-0 h-full rounded-full bg-gray-900 dark:bg-gray-100",
+});
+
+export const sliderThumb = tv({
+  base: "block h-4 w-4 rounded-full border border-gray-300 bg-white shadow transition-transform data-[dragging=true]:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 dark:border-gray-600 dark:bg-gray-100",
+});
+
 export const checkboxLabel = tv({
   base: "flex items-center gap-2 text-sm",
 });

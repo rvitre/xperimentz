@@ -1,4 +1,19 @@
-import { labelRow, labelText, rangeInput, valueText } from "../styles/primitives";
+import {
+  labelRow,
+  labelText,
+  sliderRoot,
+  sliderThumb,
+  sliderTrack,
+  sliderTrackHighlight,
+  valueText,
+} from "../styles/primitives";
+import {
+  Label,
+  Slider,
+  SliderOutput,
+  SliderThumb,
+  SliderTrack,
+} from "react-aria-components";
 
 type RangeFieldProps = {
   label: string;
@@ -10,26 +25,41 @@ type RangeFieldProps = {
 };
 
 export function RangeField({ label, value, min, max, step, onChange }: RangeFieldProps) {
-  const id = label.toLowerCase().replace(/\s+/g, "-") + "-input";
+  const handleChange = (nextValue: number | number[]) => {
+    if (Array.isArray(nextValue)) {
+      onChange(nextValue[0]);
+      return;
+    }
+
+    onChange(nextValue);
+  };
+
   return (
-    <div>
+    <Slider
+      className={sliderRoot()}
+      minValue={min}
+      maxValue={max}
+      step={step}
+      value={value}
+      onChange={handleChange}
+    >
       <div className={labelRow()}>
-        <label htmlFor={id} className={labelText()}>
-          {label}
-        </label>
-        <span className={valueText()}>{value}</span>
+        <Label className={labelText()}>{label}</Label>
+        <SliderOutput className={valueText()}>
+          {({ state }) => state.getThumbValueLabel(0)}
+        </SliderOutput>
       </div>
-      <input
-        id={id}
-        type="range"
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        onChange={(event) => onChange(Number(event.target.value))}
-        className={rangeInput()}
-        aria-label={label}
-      />
-    </div>
+      <SliderTrack className={sliderTrack()}>
+        {({ state }) => (
+          <>
+            <div
+              className={sliderTrackHighlight()}
+              style={{ width: `${state.getThumbPercent(0) * 100}%` }}
+            />
+            <SliderThumb className={sliderThumb()} aria-label={label} />
+          </>
+        )}
+      </SliderTrack>
+    </Slider>
   );
 }
