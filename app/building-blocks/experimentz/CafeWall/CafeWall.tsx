@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { RangeField } from "../../../components/RangeField";
+import { RangeField } from "../../../components/RangeField/RangeField";
 import { canvasSurface, formPanel, splitLayout, surface } from "../../../styles/primitives";
 
 type CafeWallParams = {

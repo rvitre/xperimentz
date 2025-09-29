@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { RangeField } from "../../../components/RangeField";
-import { CheckboxField } from "../../../components/CheckboxField";
-import { ToggleButtonField } from "../../../components/ToggleButtonField";
+import { RangeField } from "../../../components/RangeField/RangeField";
+import { CheckboxField } from "../../../components/CheckboxField/CheckboxField";
+import { ToggleButtonField } from "../../../components/ToggleButtonField/ToggleButtonField";
 import {
   canvasSurface,
   formPanel,

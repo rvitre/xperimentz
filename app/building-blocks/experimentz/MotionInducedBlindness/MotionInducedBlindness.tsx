@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { RangeField } from "../../../components/RangeField";
+import { RangeField } from "../../../components/RangeField/RangeField";
 import {
   button,
   canvasSurface,
