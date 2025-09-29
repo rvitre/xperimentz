@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { RangeField } from "../../../components/RangeField";
+import { CheckboxField } from "../../../components/CheckboxField";
+import { ToggleButtonField } from "../../../components/ToggleButtonField";
 import {
-  button,
   canvasSurface,
-  checkboxLabel,
   formPanel,
   splitLayout,
   surface,
@@ -101,26 +101,21 @@ export function HermannGrid() {
         />
       </div>
       <form className={formPanel()} onSubmit={(e) => e.preventDefault()}>
-        <button
-          type="button"
-          aria-pressed={showMarkers}
-          onClick={() => setShowMarkers((v) => !v)}
-          className={button({ active: showMarkers })}
-        >
-          {showMarkers ? "Hide Intersection Markers" : "Show Intersection Markers"}
-        </button>
+        <ToggleButtonField
+          selectedLabel="Hide Intersection Markers"
+          unselectedLabel="Show Intersection Markers"
+          isSelected={showMarkers}
+          onChange={setShowMarkers}
+        />
         <RangeField label="Rows" value={p.rows} min={4} max={20} step={1} onChange={(v) => setP((s) => ({ ...s, rows: v }))} />
         <RangeField label="Columns" value={p.cols} min={4} max={20} step={1} onChange={(v) => setP((s) => ({ ...s, cols: v }))} />
         <RangeField label="Bar" value={p.bar} min={6} max={48} step={1} onChange={(v) => setP((s) => ({ ...s, bar: v }))} />
         <RangeField label="Cell Size" value={p.size} min={24} max={96} step={2} onChange={(v) => setP((s) => ({ ...s, size: v }))} />
-        <label className={checkboxLabel()}>
-          <input
-            type="checkbox"
-            checked={p.inverted}
-            onChange={(e) => setP((s) => ({ ...s, inverted: e.target.checked }))}
-          />
-          Invert Colors
-        </label>
+        <CheckboxField
+          label="Invert Colors"
+          isSelected={p.inverted}
+          onChange={(selected) => setP((s) => ({ ...s, inverted: selected }))}
+        />
       </form>
     </div>
   );

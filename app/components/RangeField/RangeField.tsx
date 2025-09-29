@@ -6,7 +6,7 @@ import {
   sliderTrack,
   sliderTrackHighlight,
   valueText,
-} from "../styles/primitives";
+} from "../../styles/primitives";
 import {
   Label,
   Slider,
