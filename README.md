@@ -2,8 +2,6 @@
 
 A portfolio of interactive experiments built with React Router 7 (framework mode), TypeScript, and Tailwind CSS v4.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
-
 ## Features
 
 - 🚀 Server-side rendering
