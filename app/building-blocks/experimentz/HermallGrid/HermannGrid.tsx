@@ -1,16 +1,13 @@
-﻿import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from "react";
+import { RangeField } from "../../../components/RangeField/RangeField";
+import { CheckboxField } from "../../../components/CheckboxField/CheckboxField";
+import { ToggleButtonField } from "../../../components/ToggleButtonField/ToggleButtonField";
 import {
-  button,
   canvasSurface,
-  checkboxLabel,
   formPanel,
-  labelRow,
-  labelText,
-  rangeInput,
   splitLayout,
   surface,
-  valueText,
-} from "../../styles/primitives";
+} from "../../../styles/primitives";
 
 type GridParams = {
   rows: number;
@@ -32,7 +29,7 @@ const defaults: GridParams = {
 
 export function HermannGrid() {
   const [p, setP] = useState<GridParams>(defaults);
-  const [showMarkers, setShowMarkers] = useState<boolean>(false);
+  const [showMarkers, setShowMarkers] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   const dims = useMemo(() => {
@@ -46,12 +43,12 @@ export function HermannGrid() {
     if (!canvas) return;
     canvas.width = dims.width;
     canvas.height = dims.height;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const bg = p.inverted ? '#ffffff' : '#0a0a0a';
-    const barColor = p.inverted ? '#0a0a0a' : '#ffffff';
-    const cellColor = p.inverted ? '#ffffff' : '#0a0a0a';
+    const bg = p.inverted ? "#ffffff" : "#0a0a0a";
+    const barColor = p.inverted ? "#0a0a0a" : "#ffffff";
+    const cellColor = p.inverted ? "#ffffff" : "#0a0a0a";
 
     // Background
     ctx.fillStyle = bg;
@@ -77,7 +74,7 @@ export function HermannGrid() {
     if (showMarkers) {
       // Draw small markers at intersections (excluding outer border intersections)
       ctx.save();
-      ctx.fillStyle = '#ef4444'; // red-500
+      ctx.fillStyle = "#ef4444"; // red-500
       const rad = Math.max(2, Math.floor(p.bar / 4));
       for (let r = 1; r < p.rows; r++) {
         const y = r * (p.size + p.bar) + p.bar / 2;
@@ -104,53 +101,22 @@ export function HermannGrid() {
         />
       </div>
       <form className={formPanel()} onSubmit={(e) => e.preventDefault()}>
-        <button
-          type="button"
-          aria-pressed={showMarkers}
-          onClick={() => setShowMarkers((v) => !v)}
-          className={button({ active: showMarkers })}
-        >
-          {showMarkers ? 'Hide Intersection Markers' : 'Show Intersection Markers'}
-        </button>
-        <Slider label="Rows" value={p.rows} min={4} max={20} step={1} onChange={(v) => setP((s) => ({ ...s, rows: v }))} />
-        <Slider label="Columns" value={p.cols} min={4} max={20} step={1} onChange={(v) => setP((s) => ({ ...s, cols: v }))} />
-        <Slider label="Bar" value={p.bar} min={6} max={48} step={1} onChange={(v) => setP((s) => ({ ...s, bar: v }))} />
-        <Slider label="Cell Size" value={p.size} min={24} max={96} step={2} onChange={(v) => setP((s) => ({ ...s, size: v }))} />
-        <label className={checkboxLabel()}>
-          <input type="checkbox" checked={p.inverted} onChange={(e) => setP((s) => ({ ...s, inverted: e.target.checked }))} />
-          Invert Colors
-        </label>
+        <ToggleButtonField
+          selectedLabel="Hide Intersection Markers"
+          unselectedLabel="Show Intersection Markers"
+          isSelected={showMarkers}
+          onChange={setShowMarkers}
+        />
+        <RangeField label="Rows" value={p.rows} min={4} max={20} step={1} onChange={(v) => setP((s) => ({ ...s, rows: v }))} />
+        <RangeField label="Columns" value={p.cols} min={4} max={20} step={1} onChange={(v) => setP((s) => ({ ...s, cols: v }))} />
+        <RangeField label="Bar" value={p.bar} min={6} max={48} step={1} onChange={(v) => setP((s) => ({ ...s, bar: v }))} />
+        <RangeField label="Cell Size" value={p.size} min={24} max={96} step={2} onChange={(v) => setP((s) => ({ ...s, size: v }))} />
+        <CheckboxField
+          label="Invert Colors"
+          isSelected={p.inverted}
+          onChange={(selected) => setP((s) => ({ ...s, inverted: selected }))}
+        />
       </form>
-    </div>
-  );
-}
-
-function Slider({ label, value, min, max, step, onChange }: {
-  label: string;
-  value: number;
-  min: number;
-  max: number;
-  step?: number;
-  onChange: (v: number) => void;
-}) {
-  const id = label.toLowerCase().replace(/\s+/g, '-') + '-input';
-  return (
-    <div>
-      <div className={labelRow()}>
-        <label htmlFor={id} className={labelText()}>{label}</label>
-        <span className={valueText()}>{value}</span>
-      </div>
-      <input
-        id={id}
-        type="range"
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
-        className={rangeInput()}
-        aria-label={label}
-      />
     </div>
   );
 }

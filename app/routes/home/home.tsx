@@ -32,12 +32,12 @@ export default function Home() {
         <ul className={listGrid()}>
           <li>
             <Link
-              to="/optical-illusion"
+              to="/cafe-wall"
               className={surface({ padding: "md", interactive: true, class: "block" })}
             >
-              <div className={pageHeading({ level: "item" })}>Optical Illusion</div>
+              <div className={pageHeading({ level: "item" })}>Café Wall</div>
               <div className={bodyText({ size: "sm", tone: "subtle", margin: "sm" })}>
-                First experiment sandbox.
+                Café wall illusion with tiles.
               </div>
             </Link>
           </li>

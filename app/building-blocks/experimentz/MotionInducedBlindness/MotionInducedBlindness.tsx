@@ -1,15 +1,12 @@
-﻿import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { RangeField } from "../../../components/RangeField/RangeField";
 import {
   button,
   canvasSurface,
   formPanel,
-  labelRow,
-  labelText,
-  rangeInput,
   splitLayout,
   surface,
-  valueText,
-} from "../../styles/primitives";
+} from "../../../styles/primitives";
 
 type MibParams = {
   dots: number;
@@ -57,7 +54,7 @@ export function MotionInducedBlindness() {
     (t: number) => {
       const canvas = canvasRef.current;
       if (!canvas) return;
-      const ctx = canvas.getContext('2d');
+      const ctx = canvas.getContext("2d");
       if (!ctx) return;
 
       const { width, height } = size;
@@ -65,7 +62,7 @@ export function MotionInducedBlindness() {
       const cy = height / 2;
 
       ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = '#0a0a0a';
+      ctx.fillStyle = "#0a0a0a";
       ctx.fillRect(0, 0, width, height);
 
       // mask circle boundary (optional subtle vignette)
@@ -78,7 +75,7 @@ export function MotionInducedBlindness() {
       const theta = baseAngleRef.current + elapsed * params.rotationSpeed;
 
       // Draw rotating blue dots
-      ctx.fillStyle = '#3b82f6'; // blue-500
+      ctx.fillStyle = "#3b82f6"; // blue-500
       for (const d of dots) {
         const a = d.angle + theta;
         const x = Math.cos(a) * d.r;
@@ -89,7 +86,7 @@ export function MotionInducedBlindness() {
       }
 
       // Fixation cross
-      ctx.strokeStyle = '#ffffff';
+      ctx.strokeStyle = "#ffffff";
       ctx.lineWidth = 1.5;
       ctx.beginPath();
       ctx.moveTo(-10, 0);
@@ -100,8 +97,8 @@ export function MotionInducedBlindness() {
 
       // Stationary yellow targets (triangle)
       const td = params.targetDistance;
-      const triAngles = [Math.PI / 2, (Math.PI / 2) + (2 * Math.PI) / 3, (Math.PI / 2) + (4 * Math.PI) / 3];
-      ctx.fillStyle = '#facc15'; // yellow-400
+      const triAngles = [Math.PI / 2, Math.PI / 2 + (2 * Math.PI) / 3, Math.PI / 2 + (4 * Math.PI) / 3];
+      ctx.fillStyle = "#facc15"; // yellow-400
       for (const ang of triAngles) {
         const x = Math.cos(ang) * td;
         const y = Math.sin(ang) * td;
@@ -121,12 +118,12 @@ export function MotionInducedBlindness() {
       draw(ts);
       rafRef.current = requestAnimationFrame(loop);
     };
-    if (running && typeof requestAnimationFrame === 'function') {
+    if (running && typeof requestAnimationFrame === "function") {
       startTimeRef.current = null;
       rafRef.current = requestAnimationFrame(loop);
     }
     return () => {
-      if (rafRef.current != null && typeof cancelAnimationFrame === 'function') {
+      if (rafRef.current != null && typeof cancelAnimationFrame === "function") {
         cancelAnimationFrame(rafRef.current);
       }
       // Preserve current angle so toggling pause resumes smoothly
@@ -158,44 +155,14 @@ export function MotionInducedBlindness() {
         />
       </div>
       <form className={formPanel()} onSubmit={(e) => e.preventDefault()}>
-        <Toggle label={running ? 'Pause' : 'Play'} onClick={() => setRunning((v) => !v)} active={!running} />
-        <Slider label="Dots" value={params.dots} min={50} max={1000} step={10} onChange={(v) => setParams((p) => ({ ...p, dots: v }))} />
-        <Slider label="Dot Radius" value={params.dotRadius} min={1} max={5} step={1} onChange={(v) => setParams((p) => ({ ...p, dotRadius: v }))} />
-        <Slider label="Rotation Speed" value={params.rotationSpeed} min={0} max={2} step={0.05} onChange={(v) => setParams((p) => ({ ...p, rotationSpeed: v }))} />
-        <Slider label="Mask Radius" value={params.maskRadius} min={60} max={300} step={10} onChange={(v) => setParams((p) => ({ ...p, maskRadius: v }))} />
-        <Slider label="Target Radius" value={params.targetRadius} min={4} max={20} step={1} onChange={(v) => setParams((p) => ({ ...p, targetRadius: v }))} />
-        <Slider label="Target Distance" value={params.targetDistance} min={40} max={160} step={5} onChange={(v) => setParams((p) => ({ ...p, targetDistance: v }))} />
+        <Toggle label={running ? "Pause" : "Play"} onClick={() => setRunning((v) => !v)} active={!running} />
+        <RangeField label="Dots" value={params.dots} min={50} max={1000} step={10} onChange={(v) => setParams((p) => ({ ...p, dots: v }))} />
+        <RangeField label="Dot Radius" value={params.dotRadius} min={1} max={5} step={1} onChange={(v) => setParams((p) => ({ ...p, dotRadius: v }))} />
+        <RangeField label="Rotation Speed" value={params.rotationSpeed} min={0} max={2} step={0.05} onChange={(v) => setParams((p) => ({ ...p, rotationSpeed: v }))} />
+        <RangeField label="Mask Radius" value={params.maskRadius} min={60} max={300} step={10} onChange={(v) => setParams((p) => ({ ...p, maskRadius: v }))} />
+        <RangeField label="Target Radius" value={params.targetRadius} min={4} max={20} step={1} onChange={(v) => setParams((p) => ({ ...p, targetRadius: v }))} />
+        <RangeField label="Target Distance" value={params.targetDistance} min={40} max={160} step={5} onChange={(v) => setParams((p) => ({ ...p, targetDistance: v }))} />
       </form>
-    </div>
-  );
-}
-
-function Slider({ label, value, min, max, step, onChange }: {
-  label: string;
-  value: number;
-  min: number;
-  max: number;
-  step?: number;
-  onChange: (v: number) => void;
-}) {
-  const id = label.toLowerCase().replace(/\s+/g, '-') + '-input';
-  return (
-    <div>
-      <div className={labelRow()}>
-        <label htmlFor={id} className={labelText()}>{label}</label>
-        <span className={valueText()}>{value}</span>
-      </div>
-      <input
-        id={id}
-        type="range"
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
-        className={rangeInput()}
-        aria-label={label}
-      />
     </div>
   );
 }
@@ -209,3 +176,4 @@ function Toggle({ label, onClick, active }: { label: string; onClick: () => void
 }
 
 export default MotionInducedBlindness;
+

@@ -1,10 +1,10 @@
-﻿import type { Route } from "./+types/hermann-grid";
-import { HermannGrid } from "../../experiments/hermann-grid/HermannGrid";
+import type { Route } from "./+types/hermann-grid";
+import { HermannGrid } from "../../building-blocks/experimentz/HermallGrid/HermannGrid";
 import { bodyText, pageHeading, pageShell, sectionWrapper } from "../../styles/primitives";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Hermann Grid • Xperimentz" },
+    { title: "Hermann Grid - Xperimentz" },
     {
       name: "description",
       content: "Classic Hermann grid illusion shown with adjustable parameters.",

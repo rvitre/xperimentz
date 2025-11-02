@@ -20,7 +20,7 @@ describe('MotionInducedBlindness component', () => {
   it('has adjustable sliders', async () => {
     render(<MotionInducedBlindness />);
     const user = userEvent.setup();
-    const dotsSlider = screen.getByLabelText(/dots/i);
+    const [dotsSlider] = screen.getAllByRole('slider', { name: /dots/i });
     await user.click(dotsSlider);
     expect(dotsSlider).toBeInTheDocument();
   });
